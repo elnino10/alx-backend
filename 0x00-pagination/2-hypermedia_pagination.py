@@ -5,7 +5,7 @@ import csv
 import math
 
 
-def index_range(page: int, page_size: int) ->   Tuple[int, int]:
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """Return a tuple of size two containing a start index and an end index"""
     return ((page - 1) * page_size, page * page_size)
 
@@ -39,7 +39,9 @@ class Server:
         return data[start:end]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
-        """ returns a dictionary with dataset information and the page's metadata """
+        """
+        returns a dictionary with dataset information and the page's metadata
+        """
         data = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
         next_page = page + 1 if page < total_pages else None
