@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""FIFO caching module"""
+"""LFU caching module"""
 
 from base_caching import BaseCaching
 
 
-class FIFOCache(BaseCaching):
-    """ FIFO cache class
+class LFUCache(BaseCaching):
+    """ LFU cache class
         Args:
             BaseCaching (class): Base caching class
     """
@@ -29,4 +29,8 @@ class FIFOCache(BaseCaching):
 
     def get(self, key):
         """Get an item by key"""
-        return self.cache_data.get(key)
+        if key in self.cache_data:
+            self.queue.remove(key)
+            self.queue.append(key)
+            return self.cache_data.get(key)
+        return None
