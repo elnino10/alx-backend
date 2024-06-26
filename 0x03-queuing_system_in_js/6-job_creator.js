@@ -8,14 +8,11 @@ const jobDataFormat = {
 }
 
 const job = queue.create('push_notification_code', jobDataFormat)
-job
-.on('enqueue', () => {
+job.on('enqueue', () => {
     console.log(`Notification job created: ${job.id}`);
-})
-.on('failed attempt', () => {
+}).on('failed attempt', () => {
     if (error) console.log('Notification job failed');
-})
-.on('completed', () => {
+}).on('completed', () => {
     console.log('Notification job completed');
 })
 
